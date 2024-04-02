@@ -21,7 +21,7 @@ namespace FintechService.ApplicationService.Handler.Command
 
         }
 
-        public  async Task<ResponseBase<bool>> IRequestHandler<UpdateCustomerCommand, ResponseBase<bool>>.Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
+        public  async Task<ResponseBase<bool>>  Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
         {
             try
             {
