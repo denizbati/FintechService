@@ -12,11 +12,15 @@ namespace FintechService.Repository
 
     internal abstract class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : Entity
     {
+        protected readonly DbContext _dbContext;
+
         protected readonly DbSet<TEntity> _entities;
 
         protected GenericRepository(DbContext context)
         {
             _entities = context.Set<TEntity>();
+            _dbContext = context;
+
         }
 
         public async Task<TEntity> GetByIdAsync(Guid id, bool isActive = true)

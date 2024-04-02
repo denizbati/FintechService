@@ -10,6 +10,7 @@ namespace FintechService.Controllers
 {
     [Route("customer")]
     [Produces("application/json")]
+    [ApiController]
     public class CustomerController:ControllerBase
     {
 
@@ -20,7 +21,7 @@ namespace FintechService.Controllers
             _mediator = mediator;
         }
         [HttpGet()]
-        [ProducesResponseType(200, Type = typeof(ResponseBase<GetCustomerQueryResponse>))]
+        [ProducesResponseType(200, Type = typeof(ResponseBase<List<GetCustomerQueryResponse>>))]
         public async Task<IActionResult> GetCustomer([FromQuery] GetCustomerQuery request)
         {
             var result = await _mediator.Send(request);

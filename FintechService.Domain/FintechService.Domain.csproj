@@ -7,12 +7,19 @@
 	<ItemGroup>
 		<PackageReference Include="Autofac" Version="6.4.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
 
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="Enums\" />
 	  <Folder Include="ValueObject\Dto\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\FintechService.ApiContract\FintechService.ApiContract.csproj" />
 	</ItemGroup>
 
 </Project>

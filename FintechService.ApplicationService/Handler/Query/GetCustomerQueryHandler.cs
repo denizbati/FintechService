@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using static MassTransit.ValidationResultExtensions;
 
 namespace FintechService.ApplicationService.Handler.Query
 {
@@ -21,9 +22,30 @@ namespace FintechService.ApplicationService.Handler.Query
         }
         public async Task<ResponseBase<List<GetCustomerQueryResponse>>> Handle(GetCustomerQuery request, CancellationToken cancellationToken)
         {
+            try
+            {
+                
+                var result = await _customerRepository.GetCustomerWithIdentityNumber(request.IdentityNumber, cancellationToken);
+                return new ResponseBase<List<GetCustomerQueryResponse>>()
+                {
+                    Status = 1,
+                    Message = result == null ? "İlgili Data bulunamamıştır": "Success" ,
+                    Result = null
+                };
+                
+            }
+            catch (Exception)
+            {
 
-           var result= await _customerRepository.GetCustomerWithIdentityNumber(request.IdentityNumber,cancellationToken);
-            return null;
+                return new ResponseBase<List<GetCustomerQueryResponse>>()
+                {
+                    Status = 0,
+                    Message = "DB Connection sıkıntısı var" ,
+                    Result = null
+                };
+            }
+
+          
         }
     }
 }

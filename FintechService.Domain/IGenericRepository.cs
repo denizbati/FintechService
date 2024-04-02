@@ -10,7 +10,7 @@ namespace FintechService.Domain
     {
         Task<TEntity> GetByIdAsync(Guid id, bool isActive = true);
         Task<List<TEntity>> AllAsync(bool isActive = true);
-        Task<TEntity> FindByAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<TEntity> FindByAsync(Expression<Func<TEntity, bool>> predicate, System.Threading.CancellationToken cancellationToken);
         Task<List<TEntity>> FilterByAsync(Expression<Func<TEntity, bool>> predicate, bool isActive = true);
         Task SaveAsync(TEntity entity);
         //to do update has to be async
