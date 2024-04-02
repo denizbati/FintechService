@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FintechService.Repository
@@ -22,27 +23,6 @@ namespace FintechService.Repository
             _dbContext = context;
 
         }
-
-        public async Task<TEntity> GetByIdAsync(Guid id, bool isActive = true)
-        {
-            return await _entities.SingleOrDefaultAsync(s => s.Id == id && s.IsActive == isActive);
-        }
-
-        public async Task<List<TEntity>> AllAsync(bool isActive = true)
-        {
-            return await _entities.Where(s => s.IsActive == isActive).AsQueryable().ToListAsync();
-        }
-
-        public async Task<TEntity> FindByAsync(Expression<Func<TEntity, bool>> predicate)
-        {
-            return await _entities.SingleOrDefaultAsync(predicate);
-        }
-
-        public async Task<List<TEntity>> FilterByAsync(Expression<Func<TEntity, bool>> predicate, bool isActive = true)
-        {
-            return await _entities.Where(predicate).Where(s => s.IsActive == isActive).ToListAsync();
-        }
-
         public async Task SaveAsync(TEntity entity)
         {
             await _entities.AddAsync(entity);
@@ -54,15 +34,14 @@ namespace FintechService.Repository
             return entityEntry.Entity;
         }
 
-
-        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate, bool isActive = true)
-        {
-            return await _entities.Where(predicate).Where(s => s.IsActive == isActive).CountAsync();
-        }
-
         public void Delete(TEntity entity)
         {
             entity.SetIsActive(false);
+        }
+
+        public async Task<TEntity> FindByAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
+        {
+            return await _entities.SingleOrDefaultAsync(predicate, cancellationToken);
         }
     }
 }

@@ -28,14 +28,14 @@ namespace FintechService.Controllers
             return Ok(result);
         }
         [HttpPost("create")]
-        [ProducesResponseType(200, Type = typeof(ResponseBase<CreateCustomerCommandResponse>))]
+        [ProducesResponseType(200, Type = typeof(ResponseBase<bool>))]
         public async Task<IActionResult> Create([FromBody] CreateCustomerCommand request)
         {
             var result = await _mediator.Send(request);
             return Ok(result);
         }
         [HttpPut("update")]
-        [ProducesResponseType(200, Type = typeof(ResponseBase<UpdateCustomerCommandResponse>))]
+        [ProducesResponseType(200, Type = typeof(ResponseBase<bool>))]
         public async Task<IActionResult> UpdateCustomer([FromBody] UpdateCustomerCommand request)
         {
             var result = await _mediator.Send(request);
@@ -43,7 +43,7 @@ namespace FintechService.Controllers
         }
 
         [HttpDelete("delete")]
-        [ProducesResponseType(200, Type = typeof(ResponseBase<DeleteCustomerCommandResponse>))]
+        [ProducesResponseType(200, Type = typeof(ResponseBase<bool>))]
         public async Task<IActionResult> DeleteCustomer (DeleteCustomerCommand request)
         {
             var result = await _mediator.Send(request);

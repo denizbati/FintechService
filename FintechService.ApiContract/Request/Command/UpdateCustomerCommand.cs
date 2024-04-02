@@ -4,7 +4,10 @@ using MediatR;
 
 namespace FintechService.Request.Command
 {
-    public class UpdateCustomerCommand:IRequest<ResponseBase<UpdateCustomerCommandResponse>>
+    public class UpdateCustomerCommand:IRequest<ResponseBase<bool>>
     {
+        public long IdentityNumber { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
     }
 }
